@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS本地储存</title>
+</head>
+<body>
+
+<script src="docCookies.js"></script>
+<script>
+    let arr = ['liu', 'li', 'zhang'];
+    /**
+     *  docCookie的使用
+     */
+    docCookies.setItem('names', arr)
+    console.log(docCookies.keys())
+    if(docCookies.hasItem('names')){
+        let names = docCookies.getItem('names')
+        console.log(names.split(','))
+    }
+    docCookies.removeItem('names')
+    console.log(docCookies.keys())
+
+    /**
+     * localStorage的使用     sessionStorage一样的
+     */
+    localStorage.setItem('names', arr)
+    console.log(localStorage.getItem('names').split(','))
+    localStorage.removeItem('names')
+    localStorage.setItem('name', 'liu')
+    console.log(localStorage.length)
+    localStorage.clear()
+    console.log(localStorage.length)
+</script>
+</body>
+</html>
