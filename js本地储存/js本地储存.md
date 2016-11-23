@@ -128,6 +128,13 @@ var docCookies = {
 | localStorage.removeItem(key)     | 移除键值为key的数据                  |
 | localStorage.clear()             | 清除所有数据                       |
 
+```javascript
+var arrDisplay = [0, 1, 1, 1];
+localStorage.setItem("menuTitle", arrDisplay);
+localStorage.getItem("menuTitle");
+localStorage.clear()
+```
+
 ### LocalStorage缺点
 
 - localStorage大小限制在500万字符左右，各个浏览器不一致
