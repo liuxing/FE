@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>flex圣杯布局</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        header,
+        footer{
+            height: 50px;
+            line-height: 50px;
+            background: #3375b0;
+            text-align: center;
+            color: #fff;
+            font-size: 18px;
+        }
+
+        .main{
+            display: flex;
+            min-height: 600px;
+        }
+
+        .main nav,
+        .main article,
+        .main aside{
+            border: 1px solid #eee;
+        }
+
+        .main nav{
+            order: 1;
+            flex: 1 6 20%;
+        }
+
+        .main article{
+            order: 2;
+            flex: 3 1 60%;
+        }
+
+        .main aside{
+            order: 3;
+            flex: 1 6 20%;
+        }
+
+        @media all and (max-width: 640px) {
+
+            .main {
+                -webkit-flex-flow: column;
+                flex-direction: column;
+            }
+
+            .main > article,
+            .main > nav,
+            .main > aside {
+                /* 恢复到文档内的自然顺序 */
+                order: 0;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>header</header>
+    <div class="main">
+        <article></article>
+        <nav></nav>
+        <aside></aside>
+    </div>
+    <footer>footer</footer>
+</body>
+</html>
