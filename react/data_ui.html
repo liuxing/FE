@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Going from Data to UI in React</title>
+    <script src="//cdn.bootcss.com/react/15.4.0/react.js"></script>
+    <script src="//cdn.bootcss.com/react/15.4.0/react-dom.js"></script>
+    <script src="//cdn.bootcss.com/babel-core/5.8.38/browser.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        :focus {
+            outline: none;
+        }
+
+        html {
+            font-size: 10px;
+        }
+
+        html, body, #container {
+            height: 100%;
+            background: #eee;
+            font-family: "等线", sans-serif;
+        }
+
+        #container {
+            background: #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<script type="text/babel">
+
+//    function showCircle() {
+//        let colors = ["#393E41", "#E94F37", "#1C89BF", "#A1D363"];
+//        let ran = Math.floor(Math.random() * colors.length);
+//
+//        // return a Circle with a randomly chosen color
+//        return <Circle bgColor={colors[ran]}/>;
+//    }
+
+    let Circle = React.createClass({
+        render:function () {
+            let CircleStyle = {
+                display: "inline-block",
+                width: 100,
+                height:100,
+                margin: 16,
+                borderRadius:50,
+                background:this.props.bgColor
+            }
+            return (
+                <div style={CircleStyle}></div>
+            )
+        }
+    })
+
+    let colors = ["#393E41", "#E94F37", "#1C89BF", "#A1D363",
+        "#85FFC7", "#297373", "#FF8552", "#A40E4C"];
+
+    let renderData = [];
+
+    for (let i = 0; i < colors.length; i++) {
+        renderData.push(<Circle key={i} bgColor={colors[i]}/>);
+    }
+
+    ReactDOM.render(
+            <div>
+                {renderData}
+            </div>,
+        document.querySelector('#container')
+    )
+</script>
+</body>
+</html>
