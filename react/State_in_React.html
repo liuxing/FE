@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>State in React</title>
+    <script src="//cdn.bootcss.com/react/15.4.0/react.js"></script>
+    <script src="//cdn.bootcss.com/react/15.4.0/react-dom.js"></script>
+    <script src="//cdn.bootcss.com/babel-core/5.8.38/browser.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        :focus {
+            outline: none;
+        }
+
+        html {
+            font-size: 10px;
+        }
+
+        html, body, #container {
+            height: 100%;
+            background: #eee;
+            font-family: "等线", sans-serif;
+        }
+
+        #container {
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<script type="text/babel">
+
+    /**
+     * componentDidMount：该方法在组件渲染后被调用(or mounted as React calls it).。
+     * getInitialState：该方法在组件挂载之前运行，并允许你修改组件的 state 对象。
+     * setState：该方法允许你修改 state 对象的值。
+     */
+
+    let LightningCounter = React.createClass({
+        getInitialState: function() {
+            return {
+                strikes: 0
+            };
+        },
+        timerTick: function() {
+            this.setState({
+                strikes: this.state.strikes + 100
+            });
+        },
+        componentDidMount: function() {
+            setInterval(this.timerTick, 1000);
+        },
+        render: function () {
+            let titStyle = {
+                fontSize: 8+'rem',
+                color: '#3375b0'
+            }
+            let conut = this.state.strikes.toLocaleString()
+            return (
+                <h1 style={titStyle}>{conut}</h1>
+            )
+        }
+    })
+
+    let CounterDisplay = React.createClass({
+        render: function() {
+
+            let divStyle = {
+                textAlign: "center",
+                backgroundColor: "black",
+                padding: 40,
+                color: "#999",
+                borderRadius: 10
+            };
+
+            let textStyles = {
+                emphasis: {
+                    fontSize: 4+'rem',
+                },
+                smallEmphasis: {
+                    fontSixe: 3+'rem',
+                    lineHeight: 3
+                },
+                small: {
+                    fontSize: 16,
+                    opacity: 0.5,
+                }
+            }
+
+            return(
+                    <div style={divStyle}>
+                        <LightningCounter/>
+                        <h2 style={textStyles.emphasis}>LIGHTNING STRIKES</h2>
+                        <h2 style={textStyles.smallEmphasis}>WORLDWIDE</h2>
+                        <h2 style={textStyles.small}>(since you loaded this example)</h2>
+                    </div>
+            );
+        }
+    });
+
+    ReactDOM.render(
+        <div>
+            <CounterDisplay></CounterDisplay>
+        </div>,
+        document.querySelector('#container')
+    )
+</script>
+</body>
+</html>
