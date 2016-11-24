@@ -16,3 +16,10 @@ filter: none | blur() | brightness() | contrast() | drop-shadow() | grayscale() 
 - `saturate(%)` 饱和度
 - `hue-rotate(deg)` 设置色相旋转
 - `url()`URL函数接受一个XML文件，该文件设置了 一个SVG滤镜，且可以包含一个锚点来指定一个具体的滤镜元素。
+- invert(%) 反转输入图像
+
+链接：
+- [MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/filter) 
+- [菜鸟](http://www.runoob.com/cssref/css3-pr-filter.html) 
+- [CSS3 Filter的十种特效](http://www.w3cplus.com/css3/ten-effects-with-css3-filter)
+
