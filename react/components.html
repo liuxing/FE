@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>react component</title>
+    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        :focus {
+            outline: none;
+        }
+
+        html {
+            font-size: 10px;
+        }
+
+        html, body, #container {
+            height: 100%;
+            background: #eee;
+            font-family: "等线", sans-serif;
+        }
+
+        #container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #container h1 {
+            font-size: 4rem;
+        }
+
+        #container h3 {
+            font-size: 3rem;
+        }
+
+        button {
+            border: 0;
+            width: 200px;
+            height: 40px;
+            margin: 16px 0;
+            color: #fff;
+            background: linear-gradient(to right, rgb(255, 92, 38), rgb(61, 232, 153))
+        }
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<script type="text/babel">
+
+    /**
+     * 创建一个组件  React.createClass
+     * 指定属性     this.props属性来调用它
+     * 处理子元素   this.props.children
+     */
+
+    let HelloWorld = React.createClass({
+        render: function () {
+            return (
+                    <h1>hello,{this.props.greetTarget}</h1>  //在 JSX 中，如果你想把一些事情当作表达式来计算，就必须将它放在大括号中
+            )
+        }
+    });
+
+    let Btn = React.createClass({
+        render: function () {
+            return (
+                    <button type={this.props.behavior}>{this.props.children}</button>
+            )
+        }
+    });
+
+    ReactDOM.render(
+            <div>
+                <HelloWorld greetTarget="Tom"></HelloWorld>
+                <HelloWorld greetTarget="Jerry"></HelloWorld>
+                <HelloWorld greetTarget="liu"></HelloWorld>
+                <h3>Tom</h3>
+                <h3>Jerry</h3>
+                <Btn behavior="submit">Submit</Btn>
+            </div>,
+        document.getElementById('container')
+    );
+</script>
+</body>
+</html>
