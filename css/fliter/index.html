@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>filter</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        html,body,.container{
+            height: 100%;
+        }
+
+        .container{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            background: #ddd;
+        }
+
+        img{
+            width: 200px;
+            margin: 15px 0;
+        }
+
+        img:nth-child(2){   /* 高斯模糊 */
+            -webkit-filter: blur(5px);
+            filter: blur(5px);
+        }
+
+        img:nth-child(3){   /* 亮度 */
+            /*-webkit-filter: brightness(50%);*/
+            /*filter: brightness(50%);*/
+            -webkit-filter: brightness(300%);
+            filter: brightness(300%);
+        }
+
+        img:nth-child(4){   /* 对比度 */
+            -webkit-filter: contrast(200%);
+            filter: contrast(200%);
+        }
+
+        img:nth-child(5){   /* 灰度 */
+            -webkit-filter: grayscale(100%);
+            filter: grayscale(100%);
+        }
+
+        img:nth-child(6){   /* 色相旋转 */
+            -webkit-filter: hue-rotate(90deg);
+            filter: hue-rotate(90deg);
+        }
+
+        img:nth-child(7){   /* 反转输入图像 */
+            -webkit-filter: invert(60%);
+            filter: invert(60%);
+        }
+
+        img:nth-child(8){   /* 深褐色 */
+            -webkit-filter: sepia(100%);
+            filter: sepia(100%);
+        }
+
+        img:nth-child(9){   /* 阴影 */
+            -webkit-filter: drop-shadow(0 0 8px #666);
+            filter: drop-shadow(0 0 8px #666);
+        }
+
+        img:last-child {    /* 饱和度 */
+            -webkit-filter: saturate(800%);
+            filter: saturate(800%);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="totoro.jpg" alt="totoro">
+        <img src="totoro.jpg" alt="totoro">
+        <img src="totoro.jpg" alt="totoro">
+        <img src="totoro.jpg" alt="totoro">
+        <img src="totoro.jpg" alt="totoro">
+        <img src="totoro.jpg" alt="totoro">
+        <img src="totoro.jpg" alt="totoro">
+        <img src="totoro.jpg" alt="totoro">
+        <img src="totoro.jpg" alt="totoro">
+        <img src="totoro.jpg" alt="totoro">
+    </div>
+
+</body>
+</html>
