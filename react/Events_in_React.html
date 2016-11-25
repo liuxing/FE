@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Events in React</title>
+    <script src="//cdn.bootcss.com/react/15.4.0/react.js"></script>
+    <script src="//cdn.bootcss.com/react/15.4.0/react-dom.js"></script>
+    <script src="//cdn.bootcss.com/babel-core/5.8.38/browser.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        :focus {
+            outline: none;
+        }
+
+        html {
+            font-size: 10px;
+        }
+
+        html, body, #container {
+            height: 100%;
+            background: #eee;
+            font-family: "等线", sans-serif;
+        }
+
+        #container {
+            background: #40c4ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<script type="text/babel">
+
+    let Counter = React.createClass({
+        render: function() {
+            let textStyle = {
+                fontSize: 8+"rem",
+                color: "#333",
+                fontWeight: "bold"
+            };
+
+            return (
+                    <div style={textStyle}>
+                        {this.props.count}
+                    </div>
+            );
+        }
+    })
+
+    let CounterParent = React.createClass({
+        getInitialState: function() {
+            return {
+                count: 0
+            };
+        },
+        increase: function(e) {
+            let currentCount = this.state.count;
+            if (e.shiftKey) {
+                currentCount += 10;
+            } else {
+                currentCount += 1;
+            }
+            this.setState({
+                count: currentCount
+            });
+        },
+        render: function() {
+            let backgroundStyle = {
+                padding: 50,
+                backgroundColor: "#FFC53A",
+                width: 250,
+                height: 100,
+                borderRadius: 10,
+                textAlign: "center"
+            };
+
+            let buttonStyle = {
+                fontSize: "2rem",
+                width: 60,
+                height: 30,
+                border: "none",
+                color: "#333",
+                fontWeight: "bold",
+                lineHeight: "3px",
+                cursor: "pointer"
+            };
+
+            return (
+                    <div style={backgroundStyle}>
+                        <Counter count={this.state.count}/>
+                        <button onClick={this.increase} style={buttonStyle}>+</button>
+                    </div>
+            );
+        }
+    });
+
+    ReactDOM.render(
+            <div>
+                <CounterParent/>
+            </div>,
+        document.querySelector('#container')
+    )
+</script>
+</body>
+</html>
