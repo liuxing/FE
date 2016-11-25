@@ -138,15 +138,21 @@
         }
     })
 
+    let init = {
+        save:function (e) {
+            localStorage.setItem('todos',e)
+        },
+        read:function () {
+            return localStorage.getItem('todos')
+        }
+    }
+
     let TodoList = React.createClass({
         getInitialState: function () {
+            let items = eval(init.read()) || []
+            console.log(items)
             return {
-                items: [
-                    {
-                        key: 1480054189959,
-                        text: "test"
-                    }
-                ]
+                items: items
             };
         },
         addItem: function (e) {
@@ -163,7 +169,9 @@
             this.setState({
                 items: itemArray
             });
-            console.log(itemArray)
+            init.save(JSON.stringify(itemArray))
+//            console.log(eval(init.read()))
+//            console.log(itemArray)
             this._inputElement.value = "";
         },
         render: function () {
