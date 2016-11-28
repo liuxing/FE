@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Promise</title>
+    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+<script>
+    let url = 'https://api.douban.com/v2/movie/top250'
+    let http = {
+        get: function(url) {
+            /**
+             * promise
+             * @type {Promise}
+             */
+            let promise = new Promise(function(resolve, reject) {
+                $.ajax({  //jquery ajax
+                    url: url,
+                    method: 'get',
+                    dataType: 'jsonp',
+                    success: function(data) {
+                        resolve(data);
+                    },
+                    error: function(xhr, statusText) {
+                        reject(statusText);
+                    }
+                });
+            });
+            return promise;
+        }
+    };
+    http.get(url)
+        .then(function(data) {
+            console.log(data)
+            return data
+        }, function(err) {
+            console.log(err)
+        }).then(function (data) {
+            console.log(JSON.stringify(data))
+        })
+
+
+    /**
+     * 原生ajax
+     * @type {XMLHttpRequest}
+     */
+/*
+    let xhr = new XMLHttpRequest()
+    xhr.onreadystatechange = function () {
+        if(xhr.readyState == 4 && xhr.status == 200){
+            console.log(xhr.response)
+        }
+    }
+    xhr.open('GET', 'https://api.douban.com/v2/movie/top250', true);
+    xhr.send(null);
+*/
+
+    /**
+     *  jsonp
+     */
+    let callback = function(data){
+        console.log(data);
+    };
+/*
+    提供jsonp服务的url地址（不管是什么类型的地址，最终生成的返回值都是一段javascript代码）
+    let url = "https://api.douban.com/v2/movie/top250?callback=callback";
+    // 创建script标签，设置其属性
+    let script = document.createElement('script');
+    script.setAttribute('src', url);
+    // 把script标签加入head，此时调用开始
+    document.getElementsByTagName('head')[0].appendChild(script);
+*/
+</script>
+</body>
+</html>
