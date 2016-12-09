@@ -1,0 +1,12 @@
+/**
+ *   @author 流口水流----------date 2016/10/17
+ *----------------------------------------------*/
+
+#chess{
+    display: flex;
+    margin: 50px auto;
+    border-radius: 8px;
+    -webkit-box-shadow: 0 0 14px rgba(0, 0, 0, .3);
+    -moz-box-shadow: 0 0 14px rgba(0, 0, 0, .3);
+    box-shadow: 0 0 14px rgba(0, 0, 0, .3);
+}
