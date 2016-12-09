@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML5 Notification</title>
+</head>
+<body>
+<button onclick="notifyMe()">Notify me!</button>
+<script>
+
+    function notifyMe() {
+        if(Notification.permission == "granted"){
+            var notification = new Notification("Hi，DOG or GOD：", {
+                body: 'Lorem ipsum dolor sit amet',
+                icon: 'https://avatars2.githubusercontent.com/u/17724186?v=3&u=d1c951f70134297930e9bff5055097e3ae449556&s=400'
+            });
+        }
+    }
+</script>
+</body>
+</html>
