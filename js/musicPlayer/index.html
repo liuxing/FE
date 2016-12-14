@@ -16,16 +16,17 @@
     <audio id="music" src="http://m5.file.xiami.com/506/16506/146691/1658080_4017332_l.mp3" preload></audio>
     <header class="player-header">
         <h1>Five Hundred Miles <br><small>Justin Timberlake</small></h1>
-        <a href="javascript:void(0);" class="iconfont icon-share share"></a>
+        <a href="javascript:void(0);" class="iconfont icon-caidan menu-btn"></a>
     </header><!--//header-->
     <div class="player-con">
-        <div class="music-show">
+        <div class="music-show" ><!-- style="display: none"-->
             <div class="disk rotate">
                 <img src="images/mok.png" alt="">
             </div>
             <div class="hand"></div>
         </div>
-        <div class="music-lyrics"></div>
+        <div class="music-lyrics" style="display: none">
+        </div>
     </div><!-- //player-con -->
     <div class="player-control">
         <div class="progress">
@@ -40,6 +41,15 @@
             <a href="javascript:void(0);" class="like iconfont icon-diligently"></a>
         </div>
     </div><!-- player-control -->
+    <div class="menu" style="display: none">
+        <header class="menu-header">
+            播放列表
+        </header>
+        <ul></ul>
+        <footer class="menu-footer close">
+            关闭
+        </footer>
+    </div>
 </div>
 <script src="//cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
 <script src="js/app.js"></script>
