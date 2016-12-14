@@ -133,6 +133,8 @@ $(function () {
         progressBar.on('input',progressCtrl)
     }
 
+    let timer;
+
     /**
      * 播放音乐
      */
@@ -143,8 +145,12 @@ $(function () {
         // console.log(music.duration)
         disk.css('webkitAnimationPlayState','running')
         // 进度条
-        setInterval(function () {
+        timer = setInterval(function () {
+            // 歌曲时间
+            let totalTime = Math.floor(music.duration/60)+':'+Math.round(music.duration%60);
+            let nowTime = Math.floor(music.currentTime/60)+':'+Math.round(music.currentTime%60)
             progressBar.val(100*music.currentTime/music.duration)
+            $('.progress time').text(nowTime+'/'+totalTime)
             progressBar.css('background',`linear-gradient(to right,#666 ${progressBar.val()}%, #222 ${progressBar.val()}%)`)
         },1000)
     }
@@ -157,6 +163,7 @@ $(function () {
         $('.hand').removeClass('play')
         music.pause()
         disk.css('webkitAnimationPlayState','paused')
+        clearInterval(timer)
     }
 
     /**
@@ -173,7 +180,7 @@ $(function () {
         musicPause()
         setTimeout(function () {
             next.click()
-        }, 300)
+        }, 600)
     })
 
     function init() {
