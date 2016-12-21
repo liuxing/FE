@@ -1,0 +1,34 @@
+html,body{
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+#app{
+    height: 100%;
+}
+
+.editor{
+    height: 100%;
+    overflow: hidden;
+    vertical-align: middle;
+    background-color: #eee;
+    display: flex;
+    font-size: 18px;
+    font-family: Consolas, sans-serif;
+}
+
+.editor-input,
+.editor-output{
+    display: block;
+    width: 50%;
+    height: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.editor-input{
+    resize: none;
+    outline: none;
+}
