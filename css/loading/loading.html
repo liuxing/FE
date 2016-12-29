@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>css loading</title>
     <style>
-        html,body{
+        html, body {
             margin: 0;
             padding: 0;
         }
@@ -17,49 +17,48 @@
         |*|    color4: #373E40__RGB(55,62,64)
         \*/
 
-        body{
+        body {
             background: #00B38C;
         }
 
-        *{
+        * {
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
             box-sizing: border-box;
         }
 
-        .container{
+        .container {
             max-width: 1170px;
             margin: 0 auto;
         }
 
-        .main{
+        .main {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             align-content: center;
         }
 
-        .box{
+        .box {
             width: 195px;
             height: 195px;
             border: 1px solid #a2b4ba;
             /* 去除边框重叠 */
-            margin-right:-1px;
-            margin-top:-1px;
+            margin-right: -1px;
+            margin-top: -1px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-
-        h1{
+        h1 {
             text-transform: uppercase;
             font-family: Gabriola, sans-serif;
             color: #373E40;
             text-shadow: -2px -2px 0 rgba(0, 0, 0, .2);
         }
 
-        .loading1 span{
+        .loading1 span {
             display: inline-block;
             width: 6px;
             height: 30px;
@@ -68,70 +67,158 @@
             animation: loading1 1s ease infinite;
         }
 
-        .loading1 span:nth-child(2){
+        .loading1 span:nth-child(2) {
             animation-delay: .2s
         }
 
-        .loading1 span:last-child{
+        .loading1 span:last-child {
             animation-delay: .4s
         }
 
         @keyframes loading1 {
-            0%,40%,100%{
+            0%, 40%, 100% {
                 transform: scaleY(1);
             }
-            20%{
+            20% {
                 transform: scaleY(1.6);
             }
         }
 
-        .loading2{
+        .loading2 {
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            border: 4px solid rgba(255,255,255,.2);
+            border: 4px solid rgba(255, 255, 255, .2);
             border-top: 4px solid #fff;
             animation: loading2 1s linear infinite;
         }
 
         @keyframes loading2 {
-            0%{
+            0% {
                 transform: rotate(0deg);
             }
-            100%{
+            100% {
                 transform: rotate(360deg);
             }
         }
 
+        .loading3 {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            position: relative;
+            animation: loading2 1s linear infinite;
+        }
+
+        .loading3:after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #fff;
+            left: 50%;
+            margin-top: -10px;
+            margin-left: -10px;
+            animation: changeColor 1s linear infinite;
+        }
+
+        @keyframes changeColor {
+            0% {
+                background: #40c4ff;
+            }
+
+            100% {
+                background: #2bd168;
+            }
+        }
+
+        .loading5 {
+            width: 120px;
+            height: 15px;
+            text-align: center;
+        }
+
+        .loading5 span {
+            display: inline-block;
+            width: 10px;
+            height: 15px;
+            background-color: #fff;
+            animation: load 1.4s ease infinite;
+        }
+
+        @-webkit-keyframes load {
+            0% {
+                opacity: 1;
+                -webkit-transform: scale(1.2);
+            }
+            100% {
+                opacity: .2;
+                -webkit-transform: scale(.2);
+            }
+        }
+
+        .loading5 span:first-child{
+            animation-delay: .13s;
+        }
+
+        .loading5 span:nth-child(2){
+            animation-delay: .26s;
+        }
+
+        .loading5 span:nth-child(3){
+            animation-delay: .39s;
+        }
+
+        .loading5 span:nth-child(4){
+            animation-delay: .52s;
+        }
+
+        .loading5 span:nth-child(5){
+            animation-delay: .65s;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>CSS LOADING</h1>
-        <div class="main">
-            <div class="box">
-                <div class="loading1">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+<div class="container">
+    <h1>CSS LOADING</h1>
+    <div class="main">
+        <div class="box">
+            <div class="loading1">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            <div class="box">
-                <div class="loading2">
-
-                </div>
-            </div>
-            <div class="box"></div>
-            <div class="box"></div>
-            <div class="box"></div>
-            <div class="box"></div>
-            <div class="box"></div>
-            <div class="box"></div>
-            <div class="box"></div>
-            <div class="box"></div>
-            <div class="box"></div>
-            <div class="box"></div>
         </div>
+        <div class="box">
+            <div class="loading2">
+
+            </div>
+        </div>
+        <div class="box">
+            <div class="loading3">
+
+            </div>
+        </div>
+        <div class="box">
+            <div class="loading5">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
     </div>
+</div>
 </body>
 </html>
