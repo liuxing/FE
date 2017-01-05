@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>redux</title>
+    <script src="//cdn.bootcss.com/redux/3.6.0/redux.min.js"></script>
+</head>
+<body>
+
+<script>
+    // Action creators
+
+    function inc() {
+        return {
+            type: 'INCREMENT'
+        }
+    }
+
+    function dec() {
+        return {
+            type: 'DECREMENT'
+        }
+    }
+
+    function reducer(state, action) {
+        state = state || {counter: 0}
+
+        switch (action.type){
+            case 'INCREMENT':
+                return {
+                    counter: state.counter + 1
+                }
+            case 'DECREMENT':
+                return {
+                    counter: state.counter - 1
+                }
+            default:
+                return state; // 无论如何都返回一个 state
+        }
+    }
+
+    let store = Redux.createStore(reducer)
+
+    console.log(store.getState()) // { counter: 0 }
+
+    store.dispatch(inc());
+    console.log( store.getState()) // { counter: 1 }
+
+    store.dispatch(inc());
+    console.log( store.getState()) // { counter: 2 }
+
+    store.dispatch(dec());
+    console.log( store.getState()) // { counter: 1 }
+</script>
+
+</body>
+</html>
