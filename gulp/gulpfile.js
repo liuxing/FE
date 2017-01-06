@@ -2,6 +2,8 @@ const gulp = require('gulp')
 const watchPath = require('gulp-watch-path')
 const gutil = require('gulp-util')
 const combiner = require('stream-combiner2')
+const browserSync = require('browser-sync').create()
+const reload = browserSync.reload;
 
 const uglify = require('gulp-uglify')
 const babel = require('gulp-babel')
@@ -53,7 +55,7 @@ gulp.task('uglify', function () {
 
 gulp.task('sass',function () {
     gulp.watch('src/scss/**/*', function (event) {
-        let paths = watchPath(event, 'src/scss/', 'dist/css/')
+        let paths = watchPath(event, 'src/', 'dist/css/')
 
         gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath)
         gutil.log('Dist ' + paths.distPath)
@@ -66,7 +68,9 @@ gulp.task('sass',function () {
                 browsers: 'last 2 versions'
             }))
             .pipe(sourcemaps.write('./'))
-            .pipe(gulp.dest(paths.distDir))
+            // @TODO
+            .pipe(gulp.dest('dist/css/'))
+            .pipe(browserSync.stream())
     })
 })
 
@@ -97,7 +101,17 @@ gulp.task('copy', function () {
 
         gulp.src(paths.srcPath)
             .pipe(gulp.dest(paths.distDir))
+            .pipe(browserSync.stream())
     })
 })
 
-gulp.task('default', ['uglify', 'sass', 'image', 'copy'])
+
+gulp.task('serve', function() {
+    browserSync.init({
+        server: {
+            baseDir: "./dist/"
+        }
+    });
+});
+
+gulp.task('default', ['uglify', 'sass', 'image', 'copy', 'serve'])
