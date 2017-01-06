@@ -9,8 +9,10 @@
   "author": "liuxing",
   "license": "ISC",
   "devDependencies": {
+    "babel-preset-env": "^1.1.5",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
+    "gulp-babel": "^6.1.2",
     "gulp-clean-css": "^2.3.2",
     "gulp-imagemin": "^3.1.1",
     "gulp-ruby-sass": "^2.1.1",

@@ -4,7 +4,7 @@ const gutil = require('gulp-util')
 const combiner = require('stream-combiner2')
 
 const uglify = require('gulp-uglify')
-const cleanCss = require('gulp-clean-css')
+const babel = require('gulp-babel')
 const sourcemaps = require('gulp-sourcemaps')
 const sass = require('gulp-ruby-sass')
 const imagemin = require('gulp-imagemin')
@@ -39,6 +39,7 @@ gulp.task('uglify', function () {
         let combined = combiner.obj([
             gulp.src(paths.srcPath),
             sourcemaps.init(),
+            babel(),
             uglify(),
             sourcemaps.write('./'),
             gulp.dest(paths.distDir)
