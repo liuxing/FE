@@ -1,0 +1,1 @@
+var arr=[1,2,3,4,5];arr.forEach(function(o,r){console.log(o,r)});for(var i=0;i<10;i++)console.log(i);console.log("test file");
