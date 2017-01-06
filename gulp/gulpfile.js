@@ -1,70 +1,102 @@
 const gulp = require('gulp')
+const watchPath = require('gulp-watch-path')
+const gutil = require('gulp-util')
+const combiner = require('stream-combiner2')
+
 const uglify = require('gulp-uglify')
 const cleanCss = require('gulp-clean-css')
 const sourcemaps = require('gulp-sourcemaps')
 const sass = require('gulp-ruby-sass')
 const imagemin = require('gulp-imagemin')
+const autoprefixer = require('gulp-autoprefixer')
 
-// 处理js文件
-gulp.task('script', function() {
-    gulp.src('src/js/*.js')
-        .pipe(uglify())
-        .pipe(gulp.dest('dist/js'))
+let handleError = function (err) {
+    let colors = gutil.colors;
+    console.log('\n')
+    gutil.log(colors.red('Error!'))
+    gutil.log('fileName: ' + colors.red(err.fileName))
+    gutil.log('lineNumber: ' + colors.red(err.lineNumber))
+    gutil.log('message: ' + err.message)
+    gutil.log('plugin: ' + colors.yellow(err.plugin))
+}
+
+// js
+gulp.task('uglify', function () {
+    gulp.watch('src/js/**/*.js', function (event) {
+        let paths = watchPath(event, 'src/', 'dist/')
+        /*
+         paths
+         { srcPath: 'src/js/app.js',
+         srcDir: 'src/js/',
+         distPath: 'dist/js/app.js',
+         distDir: 'dist/js/',
+         srcFilename: 'app.js',
+         distFilename: 'app.js' }
+         */
+        gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath)
+        gutil.log('Dist ' + paths.distPath)
+
+        let combined = combiner.obj([
+            gulp.src(paths.srcPath),
+            sourcemaps.init(),
+            uglify(),
+            sourcemaps.write('./'),
+            gulp.dest(paths.distDir)
+        ])
+
+        combined.on('error', handleError)
+    })
 })
 
-// 自动 监听文件修改
-gulp.task('auto', function () {
-    gulp.watch('src/js/*.js', ['script'])
+// scss
+
+gulp.task('sass',function () {
+    gulp.watch('src/scss/**/*', function (event) {
+        let paths = watchPath(event, 'src/scss/', 'dist/css/')
+
+        gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath)
+        gutil.log('Dist ' + paths.distPath)
+        sass(paths.srcPath)
+            .on('error', function (err) {
+                console.error('Error!', err.message);
+            })
+            .pipe(sourcemaps.init())
+            .pipe(autoprefixer({
+                browsers: 'last 2 versions'
+            }))
+            .pipe(sourcemaps.write('./'))
+            .pipe(gulp.dest(paths.distDir))
+    })
 })
 
-// // 默认任务 default
-// gulp.task('default', ['script', 'auto'])
+// image
 
-// 处理css文件
+gulp.task('image', function () {
+    gulp.watch('src/images/**/*', function (event) {
+        let paths = watchPath(event,'src/','dist/')
 
-gulp.task('minify-css', function () {
-    gulp.src('src/css/*.css')
-        .pipe(sourcemaps.init())
-        .pipe(cleanCss())
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest('dist/css'))
+        gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath)
+        gutil.log('Dist ' + paths.distPath)
+
+        gulp.src(paths.srcPath)
+            .pipe(imagemin({
+                progressive: true
+            }))
+            .pipe(gulp.dest(paths.distDir))
+    })
 })
 
-// gulp auto 启动此任务
-gulp.task('auto', function () {
-    gulp.watch('src/css/*.css', ['css'])
-});
+// copy
+gulp.task('copy', function () {
+    gulp.watch('src/**/*', function (event) {
+        let paths = watchPath(event, 'src/', 'dist/')
 
-// 默认任务 default
-// gulp.task('default', ['css', 'auto'])
+        gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath)
+        gutil.log('Dist ' + paths.distPath)
 
-// 图片
+        gulp.src(paths.srcPath)
+            .pipe(gulp.dest(paths.distDir))
+    })
+})
 
-gulp.task('imagemin', () =>
-    gulp.src('src/images/*')
-        .pipe(imagemin())
-        .pipe(gulp.dest('dist/images'))
-)
-
-gulp.task('auto', function () {
-    // 监听文件修改，当文件被修改则执行 images 任务
-    gulp.watch('images/*.*)', ['images'])
-});
-
-
-// gulp.task('default', ['images', 'auto'])
-
-
-// sass
-
-gulp.task('sass', () =>
-    sass('src/css/*.scss', {sourcemap: true, style: 'compressed'})
-        .on('error', sass.logError)
-        .on('error', sass.logError)
-        .pipe(sourcemaps.write())
-        .pipe(sourcemaps.write('maps', {
-            includeContent: false,
-            sourceRoot: 'source'
-        }))
-        .pipe(gulp.dest('dist/css'))
-)
+gulp.task('default', ['uglify', 'sass', 'image', 'copy'])
