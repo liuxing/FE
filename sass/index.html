@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sass</title>
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<header class="header">
+    <h1>sass</h1>
+</header>
+
+<div class="main">
+    <article>
+        <h1>变量</h1>
+        <p>sass可以方便的定义变量</p>
+        <div class="content">
+            <pre>
+                <code>
+//sass style
+//-----------------------------------
+$fontSize: 14px;
+$bg:#f8f8f8;
+$primaryColor: #333;
+$container: 660px;
+
+body{
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    background-color: $bg;
+    color: $primaryColor;
+}
+                </code>
+            </pre>
+        </div>
+    </article>
+    <article>
+        <h1>嵌套</h1>
+        <p>sass可以进行选择器的嵌套，表示层级关系，看起来很优雅整齐。</p>
+        <div class="content">
+            <pre>
+                <code>
+//sass style
+//-----------------------------------
+.header{
+    height: 80px;
+    h1{
+        text-align: center;
+        color: #b37399;
+        font: 48px/2 Candara, sans-serif;
+        margin: 0;
+    }
+}
+                </code>
+            </pre>
+        </div>
+    </article>
+    <article>
+        <h1>导入</h1>
+        <p>sass中如导入其他sass文件，最后编译为一个css文件，优于纯css的@import</p>
+        <div class="content">
+            <pre>
+                <code>
+//sass style
+//-----------------------------------
+// _variable.scss
+
+@import "variable";
+
+                </code>
+            </pre>
+        </div>
+    </article>
+    <article>
+        <h1>mixin</h1>
+        <p>sass中可用mixin定义一些代码片段，且可传参数，方便日后根据需求调用。从此处理css3的前缀兼容轻松便捷</p>
+        <p>现在处理css3前缀有了更好的解决方案： autoprefixer</p>
+        <div class="content">
+            <pre>
+                <code>
+//sass style
+//-----------------------------------
+//sass style
+//-----------------------------------
+@mixin box-sizing ($sizing) {
+    -webkit-box-sizing:$sizing;
+       -moz-box-sizing:$sizing;
+            box-sizing:$sizing;
+}
+.box-border{
+    border:1px solid #ccc;
+    @include box-sizing(border-box);
+}
+
+                </code>
+            </pre>
+        </div>
+    </article>
+    <article>
+        <h1>扩展/继承</h1>
+        <p>sass可通过@extend来实现代码组合声明，使代码更加优越简洁</p>
+        <div class="content">
+            <pre>
+                <code>
+//sass style
+//-----------------------------------
+.btn{
+    height: 40px;
+    width: 100px;
+    border: none;
+    cursor: pointer;
+}
+
+.success{
+    @extend .btn;
+    background-color: green;
+}
+
+.warning{
+    @extend .btn;
+    background-color: yellow;
+}
+
+.error{
+    @extend .btn;
+    background-color: red;
+}
+
+                </code>
+            </pre>
+            <div class="btns">
+                <button class="btn danger"></button>
+                <button class="btn success"></button>
+                <button class="btn warning"></button>
+                <button class="btn error"></button>
+            </div>
+        </div>
+    </article>
+    <article>
+        <h1>运算</h1>
+        <p>sass可进行简单的加减乘除运算</p>
+        <div class="content">
+            <pre>
+                <code>
+//sass style
+//-----------------------------------
+article[role="main"] {
+  float: left;
+  width: 600px / 960px * 100%;
+}
+
+aside[role="complimentary"] {
+  float: right;
+  width: 300px / 960px * 100%;
+}
+
+                </code>
+            </pre>
+        </div>
+    </article>
+    <article>
+        <h1>颜色</h1>
+        <p>sass中集成了大量的颜色函数，让变换颜色更加简单。</p>
+        <div class="content">
+            <pre>
+                <code>
+//sass style
+//-----------------------------------
+//sass style
+//-----------------------------------
+$linkColor: #08c;
+a {
+    text-decoration:none;
+    color:$linkColor;
+    &:hover{
+      color:darken($linkColor,10%);
+    }
+}
+
+                </code>
+            </pre>
+        </div>
+    </article>
+</div>
+</body>
+</html>

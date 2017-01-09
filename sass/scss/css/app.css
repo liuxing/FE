@@ -1,0 +1,55 @@
+* {
+  box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  background-color: #f8f8f8;
+  color: #333; }
+
+.header {
+  height: 80px; }
+  .header h1 {
+    text-align: center;
+    color: #b37399;
+    font: 48px/2 Candara, sans-serif;
+    margin: 0; }
+
+.main {
+  width: 660px;
+  margin: 0 auto; }
+
+pre {
+  background-color: #e3d2d2;
+  border-radius: 8px;
+  padding: 10px 15px; }
+
+.btns {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  padding: 15px; }
+
+.btn, .success, .warning, .error {
+  height: 40px;
+  width: 100px;
+  border: none;
+  cursor: pointer;
+  opacity: .8; }
+  .btn:hover, .success:hover, .warning:hover, .error:hover {
+    opacity: 1; }
+
+.success {
+  background-color: green; }
+
+.warning {
+  background-color: yellow; }
+
+.error {
+  background-color: red; }
+
+
+
+/*# sourceMappingURL=app.css.map */

@@ -1,0 +1,72 @@
+@import "variable";
+@mixin box-sizing($sizing){
+    -webkit-box-sizing:$sizing;
+    -moz-box-sizing:$sizing;
+    box-sizing:$sizing;
+}
+
+*{
+    //box-sizing: border-box;
+    @include box-sizing(border-box)
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    background-color: $bg;
+    color: $primaryColor;
+}
+
+.header{
+    height: 80px;
+    h1{
+        text-align: center;
+        color: #b37399;
+        font: 48px/2 Candara, sans-serif;
+        margin: 0;
+    }
+}
+
+.main{
+    width: $container;
+    margin: 0 auto;
+}
+
+pre{
+    background-color: #e3d2d2;
+    border-radius: 8px;
+    padding: 10px 15px;
+}
+
+.btns{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.btn{
+    height: 40px;
+    width: 100px;
+    border: none;
+    cursor: pointer;
+    opacity: .8;
+    &:hover{
+        opacity: 1;
+    }
+}
+
+.success{
+    @extend .btn;
+    background-color: green;
+}
+
+.warning{
+    @extend .btn;
+    background-color: yellow;
+}
+
+.error{
+    @extend .btn;
+    background-color: red;
+}
